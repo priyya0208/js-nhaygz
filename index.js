@@ -88,20 +88,18 @@ function displayPyramid(n) {
 
 function layerTopRight (matrix){
   var top = matrix.splice(0,1);
-  console.log(matrix.length);
   var right = [];
   for(var i=0;i<matrix.length;i++){
     var e = matrix[i].splice(-1,1);
     console.log(e);
     right.push(e);
-    return console.log(top.concat(right).toString().split());
+    return top.concat(right).toString().split();
   }
 }
 
 
 function layerBottomLeft (matrix){
   var bottom = matrix.splice(matrix.length-1, 1)[0].reverse();
-  console.log(bottom);
   var left = [];
   for(var i=0;i<matrix.length;i++){
     var e = matrix.splice(0,1);
@@ -109,11 +107,24 @@ function layerBottomLeft (matrix){
   }
   
   // return the top row and last column elements as a list
-  return console.log(bottom.concat(left.reverse()).toString().split());
+  return bottom.concat(left.reverse()).toString().split();
 }
 
-var M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];s
+function spiral(matrix) {
+  var spir = [];
+  while(matrix.length> 0 ){
+    if(matrix.length == 1){
+      spir.push(matrix[0]);
+      break;
+    }
+    var tr = layerTopRight(matrix);
+    spir.push(tr);
+    var bl = layerBottomLeft(matrix)
+    spir.push(bl);
+  }
+  return console.log(spir.toString().split());
+}
+var M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-layerTopRight(M);
-layerBottomLeft(M);
+spiral(M);//["1,2,3,6,9,8,7,4,5"]
 
